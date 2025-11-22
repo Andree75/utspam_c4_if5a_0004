@@ -78,10 +78,14 @@ class _HistoryPageState extends State<HistoryPage> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Jumlah: ${trans.quantity} | Tgl: ${trans.date}"),
-                      Text(
-                        "Total: ${currencyFormatter.format(trans.totalPrice)}",
-                        style: const TextStyle(color: Colors.green),
+                      Text("Jumlah pembelian : ${trans.quantity}"),
+                      Text("Nama pembeli : ${trans.username}"),
+                      Text("Tanggal pembelian : ${trans.date}\n"),
+                      Center(
+                        child: Text(
+                          "Total: ${currencyFormatter.format(trans.totalPrice)}",
+                          style: const TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),

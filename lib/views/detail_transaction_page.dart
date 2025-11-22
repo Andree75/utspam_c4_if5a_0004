@@ -95,7 +95,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.teal,
+                      color: Colors.blueGrey,
                     ),
                   ),
                 ),
@@ -117,7 +117,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                 const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.all(10),
-                  color: Colors.blue[50],
+                  color: Colors.deepOrange[50],
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -130,7 +130,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.blue,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -159,6 +159,9 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                         icon: const Icon(Icons.edit),
                         label: const Text("Edit"),
                         onPressed: _editTransaction,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellowAccent,
+                        ),
                       ),
                     ),
                   ],
@@ -177,8 +180,8 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(color: Colors.grey)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
+          Text(label, style: const TextStyle(color: Colors.black)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
         ],
       ),
     );

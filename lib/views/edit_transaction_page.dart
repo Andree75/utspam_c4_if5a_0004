@@ -166,14 +166,26 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text("BATAL"),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.black),
+                      ),
+                      child: const Text(
+                        "BATAL",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _saveChanges,
-                      child: const Text("SIMPAN"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightBlue,
+                      ),
+                      child: const Text(
+                        "SIMPAN",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ),
                 ],

@@ -20,25 +20,25 @@ class _HomePageState extends State<HomePage> {
       'name': 'Paracetamol',
       'category': 'Demam',
       'price': 15000,
-      'image': 'assets/obat1.png',
+      'image': 'assets/Paracetamol.jpg',
     },
     {
       'name': 'Amoxicillin',
       'category': 'Antibiotik',
       'price': 25000,
-      'image': 'assets/obat2.png',
+      'image': 'assets/Amoxicillin.jpg',
     },
     {
       'name': 'Betadine',
       'category': 'Antiseptik',
       'price': 10000,
-      'image': 'assets/obat3.png',
+      'image': 'assets/Betadine.png',
     },
     {
       'name': 'Vitamin C',
       'category': 'Vitamin',
       'price': 50000,
-      'image': 'assets/obat4.png',
+      'image': 'assets/Vitamin C.jpg',
     },
   ];
 
@@ -156,12 +156,22 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Expanded(
                         child: Container(
-                          color: const Color.fromARGB(255, 4, 63, 192),
+                          color: Colors.grey[200],
                           width: double.infinity,
-                          child: const Icon(
-                            Icons.medication_liquid_rounded,
-                            size: 50,
-                            color: Color.fromARGB(255, 207, 253, 0),
+                          child: Image.asset(
+                            obat['image'],
+                            fit: BoxFit.cover,
+                            //cacheWidth: 250,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[200],
+                                child: const Icon(
+                                  Icons.broken_image,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),

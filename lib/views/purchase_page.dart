@@ -185,9 +185,13 @@ class _PurchasePageState extends State<PurchasePage> {
               ElevatedButton(
                 onPressed: _submitTransaction,
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow,
                   minimumSize: const Size.fromHeight(50),
                 ),
-                child: const Text("KONFIRMASI PEMBELIAN"),
+                child: const Text(
+                  "KONFIRMASI PEMBELIAN",
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
               ),
             ],
           ),
