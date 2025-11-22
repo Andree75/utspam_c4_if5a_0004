@@ -12,3 +12,24 @@ class DetailTransactionPage extends StatefulWidget {
   @override
   State<DetailTransactionPage> createState() => _DetailTransactionPageState();
 }
+
+class _DetailTransactionPageState extends State<DetailTransactionPage> {
+  late TransactionModel currentTransaction;
+
+  @override
+  void initState() {
+    super.initState();
+    currentTransaction = widget.transaction;
+  }
+  void _deleteTransaction() async {
+    // Konfirmasi Hapus
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Hapus Transaksi?"),
+        content: const Text("Data akan hilang permanen dari riwayat."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Batal"),
+          ),
