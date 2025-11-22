@@ -50,3 +50,54 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
             child: const Text("Hapus", style: TextStyle(color: Colors.white)),
           ),
 
+        ],
+      ),
+    );
+  }
+
+  void _editTransaction() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            EditTransactionPage(transaction: currentTransaction),
+      ),
+    );
+
+    if (result != null && result is TransactionModel) {
+      setState(() {
+        currentTransaction = result;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+    );
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Detail Transaksi")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Card(
+          elevation: 4,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    currentTransaction.medicineName,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal,
+                    ),
+                  ),
+                ),
+
