@@ -21,6 +21,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
     super.initState();
     currentTransaction = widget.transaction;
   }
+
   void _deleteTransaction() async {
     // Konfirmasi Hapus
     showDialog(
@@ -49,7 +50,6 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
             },
             child: const Text("Hapus", style: TextStyle(color: Colors.white)),
           ),
-
         ],
       ),
     );
@@ -100,4 +100,91 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                     ),
                   ),
                 ),
+                const Divider(thickness: 2),
+                const SizedBox(height: 10),
+                _buildRow("ID Transaksi", "#${currentTransaction.id}"),
+                _buildRow("Tanggal", currentTransaction.date),
+                _buildRow("Pembeli", currentTransaction.username),
+                const Divider(),
+                _buildRow(
+                  "Harga Satuan",
+                  currencyFormatter.format(currentTransaction.price),
+                ),
+                _buildRow("Jumlah Beli", "${currentTransaction.quantity}"),
+                _buildRow("Metode", currentTransaction.type),
+                if (currentTransaction.recipeNumber != null)
+                  _buildRow(
+                    "No. [cite_start]Resep",
+                    currentTransaction.recipeNumber!,
+                  ), // [cite: 202]
 
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.blue[50],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "TOTAL HARGA",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        currencyFormatter.format(currentTransaction.totalPrice),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        label: const Text(
+                          "Hapus",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.red),
+                        ),
+                        onPressed: _deleteTransaction,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.edit),
+                        label: const Text("Edit"),
+                        onPressed: _editTransaction,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(color: Colors.grey)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
+        ],
+      ),
+    );
+  }
+}
