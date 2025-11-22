@@ -43,3 +43,30 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
       _totalPrice = qty * widget.transaction.price;
     });
   }
+
+  void _saveChanges() async {
+    if (_formKey.currentState!.validate()) {
+      TransactionModel updatedTransaction = TransactionModel(
+        id: widget.transaction.id, // ID Tetap
+        username: widget.transaction.username,
+        medicineName: widget.transaction.medicineName,
+        price: widget.transaction.price,
+        quantity: int.parse(_qtyController.text),
+        totalPrice: _totalPrice,
+        date: widget.transaction.date,
+        type: _selectedMethod,
+        recipeNumber: _selectedMethod == "Resep Dokter"
+            ? _recipeController.text
+            : null,
+      );
+
+      await DatabaseHelper.instance.updateTransaction(updatedTransaction);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Transaksi Berhasil Diperbarui!')),
+        );
+        Navigator.pop(context, updatedTransaction);
+      }
+    }
+  }
