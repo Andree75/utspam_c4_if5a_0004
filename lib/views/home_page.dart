@@ -126,6 +126,114 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Rekomendasi Obat :",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: medicines.length,
+              itemBuilder: (context, index) {
+                final obat = medicines[index];
+                return Card(
+                  elevation: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          color: const Color.fromARGB(255, 4, 63, 192),
+                          width: double.infinity,
+                          child: const Icon(
+                            Icons.medication_liquid_rounded,
+                            size: 50,
+                            color: Color.fromARGB(255, 207, 253, 0),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              obat['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            Text(
+                              obat['category'],
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                fontSize: 13,
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                currencyFormatter.format(obat['price']),
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 170, 23, 175),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color.fromARGB(
+                                    255,
+                                    85,
+                                    231,
+                                    0,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PurchasePage(
+                                        user: widget.user,
+                                        medicineName: obat['name'],
+                                        price: obat['price'],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  "Beli",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
