@@ -70,3 +70,44 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
       }
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+    );
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Edit Transaksi")),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Edit Pembelian: ${widget.transaction.medicineName}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Divider(),
+
+              // Edit Jumlah
+              TextFormField(
+                controller: _qtyController,
+                decoration: const InputDecoration(
+                  labelText: "Jumlah Pembelian",
+                ),
+                keyboardType: TextInputType.number,
+                validator: (val) {
+                  if (val == null || val.isEmpty) return "Wajib diisi";
+                  if (int.tryParse(val) == null || int.parse(val) <= 0)
+                    return "Harus angka positif";
+                  return null;
+                },
+              ),
+              
