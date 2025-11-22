@@ -33,3 +33,20 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
             onPressed: () => Navigator.pop(context),
             child: const Text("Batal"),
           ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () async {
+              await DatabaseHelper.instance.deleteTransaction(
+                currentTransaction.id!,
+              ); // [cite: 205]
+              if (mounted) {
+                Navigator.pop(context);
+                Navigator.pop(context, true);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Transaksi berhasil dihapus")),
+                );
+              }
+            },
+            child: const Text("Hapus", style: TextStyle(color: Colors.white)),
+          ),
+
