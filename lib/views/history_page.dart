@@ -44,7 +44,6 @@ class _HistoryPageState extends State<HistoryPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            // Kembali ke Home [cite: 190]
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -75,17 +74,15 @@ class _HistoryPageState extends State<HistoryPage> {
                   title: Text(
                     trans.medicineName,
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                  ), // [cite: 182]
+                  ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Jumlah: ${trans.quantity} | Tgl: ${trans.date}",
-                      ), // [cite: 184, 186]
+                      Text("Jumlah: ${trans.quantity} | Tgl: ${trans.date}"),
                       Text(
                         "Total: ${currencyFormatter.format(trans.totalPrice)}",
                         style: const TextStyle(color: Colors.green),
-                      ), // [cite: 185]
+                      ),
                     ],
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios, size: 16),

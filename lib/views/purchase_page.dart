@@ -45,7 +45,6 @@ class _PurchasePageState extends State<PurchasePage> {
 
   void _submitTransaction() async {
     if (_formKey.currentState!.validate()) {
-      // Simpan Transaksi
       TransactionModel transaction = TransactionModel(
         username: widget.user.username,
         medicineName: widget.medicineName,

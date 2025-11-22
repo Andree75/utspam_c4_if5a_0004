@@ -23,7 +23,6 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
   }
 
   void _deleteTransaction() async {
-    // Konfirmasi Hapus
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -116,7 +115,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                   _buildRow(
                     "No. [cite_start]Resep",
                     currentTransaction.recipeNumber!,
-                  ), // [cite: 202]
+                  ),
 
                 const SizedBox(height: 20),
                 Container(

@@ -17,14 +17,12 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
   late TextEditingController _qtyController;
   late TextEditingController _recipeController;
 
-  // Kita tidak mengedit nama obat/harga satuan, hanya detail pembelian
   String _selectedMethod = "Langsung";
   int _totalPrice = 0;
 
   @override
   void initState() {
     super.initState();
-    // Isi form dengan data lama
     _qtyController = TextEditingController(
       text: widget.transaction.quantity.toString(),
     );
@@ -47,7 +45,7 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
   void _saveChanges() async {
     if (_formKey.currentState!.validate()) {
       TransactionModel updatedTransaction = TransactionModel(
-        id: widget.transaction.id, // ID Tetap
+        id: widget.transaction.id,
         username: widget.transaction.username,
         medicineName: widget.transaction.medicineName,
         price: widget.transaction.price,
@@ -94,9 +92,8 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Divider(),
 
-              // Edit Jumlah
+              const Divider(),
               TextFormField(
                 controller: _qtyController,
                 decoration: const InputDecoration(
@@ -110,4 +107,79 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
                   return null;
                 },
               ),
-              
+
+              const SizedBox(height: 10),
+              const Text(
+                "Metode Pembelian:",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              RadioListTile(
+                title: const Text("Pembelian Langsung"),
+                value: "Langsung",
+                groupValue: _selectedMethod,
+                onChanged: (val) =>
+                    setState(() => _selectedMethod = val.toString()),
+              ),
+              RadioListTile(
+                title: const Text("Pembelian dengan Resep Dokter"),
+                value: "Resep Dokter",
+                groupValue: _selectedMethod,
+                onChanged: (val) =>
+                    setState(() => _selectedMethod = val.toString()),
+              ),
+
+              if (_selectedMethod == "Resep Dokter")
+                TextFormField(
+                  controller: _recipeController,
+                  decoration: const InputDecoration(
+                    labelText: "Nomor Resep Dokter",
+                    hintText: "Min. 6 karakter (Huruf & Angka)",
+                  ),
+                  validator: (val) {
+                    if (_selectedMethod == "Resep Dokter") {
+                      if (val == null || val.length < 6)
+                        return "Minimal 6 karakter";
+                      bool hasLetter = val.contains(RegExp(r'[a-zA-Z]'));
+                      bool hasDigit = val.contains(RegExp(r'[0-9]'));
+                      if (!hasLetter || !hasDigit)
+                        return "Harus kombinasi huruf & angka";
+                    }
+                    return null;
+                  },
+                ),
+
+              const SizedBox(height: 20),
+              Text(
+                "Total Baru: ${currencyFormatter.format(_totalPrice)}",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("BATAL"),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _saveChanges,
+                      child: const Text("SIMPAN"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
