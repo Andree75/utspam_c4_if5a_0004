@@ -79,6 +79,55 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HistoryPage(user: widget.user),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.history),
+                    label: const Text(
+                      "Riwayat",
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(user: widget.user),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.person),
+                    label: const Text(
+                      "Profil",
+                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
