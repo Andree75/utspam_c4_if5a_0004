@@ -149,12 +149,14 @@ class _EditTransactionPageState extends State<EditTransactionPage> {
                 ),
 
               const SizedBox(height: 20),
-              Text(
-                "Total Baru: ${currencyFormatter.format(_totalPrice)}",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+              Center(
+                child: Text(
+                  "Total Biaya: ${currencyFormatter.format(_totalPrice)}",
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
               ),
 

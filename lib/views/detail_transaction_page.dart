@@ -112,10 +112,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                 _buildRow("Jumlah Beli", "${currentTransaction.quantity}"),
                 _buildRow("Metode", currentTransaction.type),
                 if (currentTransaction.recipeNumber != null)
-                  _buildRow(
-                    "No. [cite_start]Resep",
-                    currentTransaction.recipeNumber!,
-                  ),
+                  _buildRow("Nomor Resep", currentTransaction.recipeNumber!),
 
                 const SizedBox(height: 20),
                 Container(
