@@ -22,6 +22,20 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
     currentTransaction = widget.transaction;
   }
 
+  // ignore: unused_element
+  String _getFormattedId(TransactionModel trans) {
+    if (trans.id == null) return "Unknown";
+    String dateCode = "DATE";
+    try {
+      dateCode = trans.date.substring(0, 10).replaceAll('-', '');
+    } catch (e) {
+      dateCode = DateFormat('yyyyMMdd').format(DateTime.now());
+    }
+
+    String idCode = trans.id.toString().padLeft(4, '0');
+    return "INV-$dateCode-$idCode";
+  }
+
   void _deleteTransaction() async {
     showDialog(
       context: context,
@@ -91,6 +105,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
               children: [
                 Center(
                   child: Text(
+                    //_getFormattedId(currentTransaction),
                     currentTransaction.medicineName,
                     style: const TextStyle(
                       fontSize: 24,
@@ -101,7 +116,7 @@ class _DetailTransactionPageState extends State<DetailTransactionPage> {
                 ),
                 const Divider(thickness: 2),
                 const SizedBox(height: 10),
-                _buildRow("ID Transaksi", "#${currentTransaction.id}"),
+                _buildRow("ID Transaksi", _getFormattedId(currentTransaction)),
                 _buildRow("Tanggal", currentTransaction.date),
                 _buildRow("Pembeli", currentTransaction.username),
                 const Divider(),
